@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KENZ SHOP | Organisation Maison</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #F9F7F2; color: #2B3D4F; }
-        .font-brand { font-family: 'Cinzel', serif; }
-        .gold-gradient { background: linear-gradient(135deg, #BFA37E 0%, #8C7355 100%); }
-    </style>
-</head>
-<body>
-    <nav class="p-6 flex justify-between items-center bg-white shadow-sm">
-        <div class="flex items-center space-x-2">
-            <img src="logo_final.svg" alt="Logo" class="w-10 h-10">
-            <span class="font-brand text-xl font-bold tracking-widest">KENZ SHOP</span>
+<div class="product-card group cursor-pointer" onclick="addToCart()">
+    <div class="relative overflow-hidden aspect-[3/4] bg-gray-100 rounded-sm mb-6">
+        <img src="grande armoire 1.jpg" alt="Grande Armoire" class="product-image w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all"></div>
+        <div class="absolute bottom-6 left-6 right-6 translate-y-20 group-hover:translate-y-0 transition-transform duration-500">
+            <button class="w-full py-4 bg-white text-[#2B3D4F] text-[10px] uppercase tracking-[0.2em] font-bold shadow-2xl">Acheter maintenant</button>
         </div>
-    </nav>
-    <section class="py-20 text-center">
-        <h1 class="font-brand text-5xl mb-4">Bientôt disponible</h1>
-        <p class="text-gray-500 italic">L'excellence de l'organisation pour votre maison.</p>
-    </section>
-</body>
-</html>
+    </div>
+    <h4 class="font-brand text-lg mb-2 text-right">خزانة ملابس كبيرة - Grande Armoire</h4>
+    <p class="text-md text-[#BFA37E] font-bold mb-1 text-right">329.00 DH</p> 
+    <p class="text-[9px] text-gray-400 uppercase tracking-widest font-semibold text-right">Home & Kitchen • 170x170x45cm</p>
+</div>
