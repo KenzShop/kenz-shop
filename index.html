@@ -3,243 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio Moderne</title>
-    <!-- Tailwind CSS pour un design professionnel rapide -->
+    <title>Kenz Shop | Boutique Officielle Prestige</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Icônes Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Police Inter depuis Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        :root {
+            --gold: #B59449;
+            --navy: #1B365D;
+            --cream: #FDFBF7;
         }
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .gallery-card img {
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .gallery-card:hover img {
-            transform: scale(1.1);
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--cream); color: #2D2D2D; }
+        .font-serif { font-family: 'Cinzel', serif; }
+        .nav-blur { background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .text-gold { color: var(--gold); }
+        .bg-gold { background-color: var(--gold); }
+        .text-navy { color: var(--navy); }
+        .bg-navy { background-color: var(--navy); }
+        
+        .product-card:hover .product-img { transform: scale(1.08); }
+        .product-card .add-btn { opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+        .product-card:hover .add-btn { opacity: 1; transform: translateY(0); }
+
+        .logo-subtitle {
+            font-size: 7.5px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: -2px;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <i data-lucide="layout" class="text-white w-5 h-5"></i>
-                </div>
-                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                    Portfolio
-                </span>
-            </div>
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-[#E8E1D5]">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
             
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8 font-medium text-slate-600">
-                <a href="#accueil" class="hover:text-blue-600 transition-colors">Accueil</a>
-                <a href="#galerie" class="hover:text-blue-600 transition-colors">Galerie</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-4">
+                <img src="image.png" alt="Kenz Shop Logo" class="h-14 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('text-logo-full').classList.remove('hidden');">
+                <div id="text-logo-full" class="hidden flex flex-col items-start">
+                    <span class="text-2xl font-serif font-bold tracking-widest text-navy uppercase leading-none">Kenz Shop</span>
+                    <span class="logo-subtitle">Home • Mode • Cosmétique • Accessoires</span>
+                </div>
             </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden p-2 text-slate-600" id="menuBtn">
-                <i data-lucide="menu" id="menuIcon"></i>
-            </button>
+            <!-- Menu de Navigation -->
+            <div class="hidden lg:flex items-center space-x-8 text-[11px] font-bold uppercase tracking-[0.2em] text-navy">
+                <a href="#home" class="hover:text-gold transition-colors">Accueil</a>
+                <a href="#shop-home" class="hover:text-gold transition-colors">Home</a>
+                <a href="#shop-cosmetique" class="hover:text-gold transition-colors">Cosmétique</a>
+                <a href="#shop-femme" class="hover:text-gold transition-colors">Mode Femme</a>
+                <a href="#shop-homme" class="hover:text-gold transition-colors">Mode Homme</a>
+            </div>
+
+            <!-- Icônes -->
+            <div class="flex items-center space-x-6 text-navy">
+                <div class="relative cursor-pointer hover:text-gold transition">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-gold text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </div>
+                <button class="lg:hidden" id="mobileMenuBtn"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            </div>
         </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white w-full border-t border-slate-100 p-6 space-y-4 shadow-xl">
-            <a href="#accueil" class="block text-lg font-medium text-slate-700">Accueil</a>
-            <a href="#galerie" class="block text-lg font-medium text-slate-700">Galerie</a>
-            <a href="#contact" class="block text-lg font-medium text-slate-700">Contact</a>
+        <!-- Menu Mobile -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-t px-8 py-8 space-y-4 shadow-2xl">
+            <a href="#home" class="block text-xs font-bold uppercase tracking-widest text-navy">Accueil</a>
+            <a href="#shop-home" class="block text-xs font-bold uppercase tracking-widest text-navy">Home</a>
+            <a href="#shop-cosmetique" class="block text-xs font-bold uppercase tracking-widest text-navy">Cosmétique</a>
+            <a href="#shop-femme" class="block text-xs font-bold uppercase tracking-widest text-navy">Mode Femme</a>
+            <a href="#shop-homme" class="block text-xs font-bold uppercase tracking-widest text-navy">Mode Homme</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="accueil" class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
-            <span class="px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-semibold mb-6 border border-blue-100">
-                Disponible pour de nouveaux projets
-            </span>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-8">
-                Design digital & <br>
-                <span class="text-blue-600">Expériences web</span>
-            </h1>
-            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mb-10 leading-relaxed">
-                Je crée des interfaces intuitives et des solutions web performantes pour aider les marques à briller en ligne.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#galerie" class="px-8 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-slate-800 transition-all transform hover:-translate-y-1 shadow-lg">
-                    Voir mes travaux
-                </a>
-                <a href="#contact" class="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-2xl font-bold hover:bg-slate-50 transition-all shadow-sm">
-                    Me contacter
-                </a>
+    <!-- Hero Header -->
+    <header id="home" class="pt-32 px-6">
+        <div class="max-w-7xl mx-auto relative h-[60vh] rounded-[2.5rem] overflow-hidden group shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1616489953149-807989938838?auto=format&fit=crop&w=1600&q=80" alt="Prestige" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-navy/40"></div>
+            <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+                <h1 class="text-white font-serif text-4xl md:text-6xl mb-6 tracking-tighter uppercase italic">L'excellence au quotidien</h1>
+                <p class="text-white/80 max-w-xl font-light tracking-widest text-sm uppercase">Découvrez nos collections exclusives pour la maison et le soin.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION : PRODUITS HOME -->
+    <section id="shop-home" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-12 border-b border-gray-200 pb-6">
+            <div>
+                <h2 class="text-2xl font-serif text-navy uppercase tracking-widest">Univers Home</h2>
+                <p class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Organisation & Décoration</p>
+            </div>
+            <a href="#" class="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-navy transition">Voir tout</a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Produit 1 -->
+            <div class="product-card group cursor-pointer">
+                <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-white mb-6 relative border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                    <div class="absolute inset-x-4 bottom-4">
+                        <button onclick="addToCart()" class="add-btn w-full bg-navy text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Ajouter au panier</button>
+                    </div>
+                </div>
+                <h3 class="font-bold text-sm text-navy uppercase tracking-wide">Panier de Rangement Luxe</h3>
+                <p class="text-gold font-bold mt-2">59,00 €</p>
+            </div>
+            <!-- Produit 2 -->
+            <div class="product-card group cursor-pointer">
+                <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-white mb-6 relative border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                    <div class="absolute inset-x-4 bottom-4">
+                        <button onclick="addToCart()" class="add-btn w-full bg-navy text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Ajouter au panier</button>
+                    </div>
+                </div>
+                <h3 class="font-bold text-sm text-navy uppercase tracking-wide">Diffuseur de Parfum Or</h3>
+                <p class="text-gold font-bold mt-2">75,00 €</p>
+            </div>
+            <!-- Ajouter d'autres produits Home ici... -->
+        </div>
+    </section>
+
+    <!-- SECTION : PRODUITS COSMÉTIQUE -->
+    <section id="shop-cosmetique" class="py-24 bg-white border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between mb-12 border-b border-gray-200 pb-6">
+                <div>
+                    <h2 class="text-2xl font-serif text-navy uppercase tracking-widest">Cosmétique & Soins</h2>
+                    <p class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Beauté Naturelle</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="product-card group cursor-pointer">
+                    <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-gray-50 mb-6 relative">
+                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-x-4 bottom-4">
+                            <button onclick="addToCart()" class="add-btn w-full bg-navy text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-sm text-navy uppercase tracking-wide">Sérum Éclat Intense</h3>
+                    <p class="text-gold font-bold mt-2">45,00 €</p>
+                </div>
+                <div class="product-card group cursor-pointer">
+                    <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-gray-50 mb-6 relative">
+                        <img src="https://images.unsplash.com/photo-1601049541289-9b1b7abcfe19?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-x-4 bottom-4">
+                            <button onclick="addToCart()" class="add-btn w-full bg-navy text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Ajouter au panier</button>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-sm text-navy uppercase tracking-wide">Crème Hydratante Royale</h3>
+                    <p class="text-gold font-bold mt-2">62,00 €</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Galerie Section -->
-    <section id="galerie" class="py-24 bg-white">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Projets récents</h2>
-                    <p class="text-slate-500">Une sélection de mes dernières réalisations.</p>
-                </div>
-                <div class="flex space-x-2">
-                    <span class="px-4 py-2 rounded-lg bg-slate-100 text-slate-600 text-sm font-medium">Tous</span>
-                    <span class="px-4 py-2 rounded-lg text-slate-400 text-sm font-medium hover:bg-slate-50 cursor-pointer">Web</span>
-                    <span class="px-4 py-2 rounded-lg text-slate-400 text-sm font-medium hover:bg-slate-50 cursor-pointer">Mobile</span>
-                </div>
+    <!-- SECTION : PRODUITS MODE FEMME -->
+    <section id="shop-femme" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-12 border-b border-gray-200 pb-6">
+            <div>
+                <h2 class="text-2xl font-serif text-navy uppercase tracking-widest">Mode Femme</h2>
+                <p class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Prêt-à-porter Prestige</p>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Projet 1 -->
-                <div class="gallery-card group relative rounded-3xl overflow-hidden bg-slate-100 aspect-[4/5] cursor-pointer shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Dashboard" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white font-bold text-xl">Plateforme Analytics</h3>
-                        <p class="text-slate-200 text-sm">Dashboard de données complexes</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="product-card group cursor-pointer">
+                <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-white mb-6 relative border border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                    <div class="absolute inset-x-4 bottom-4">
+                        <button onclick="addToCart()" class="add-btn w-full bg-navy text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-gold transition-colors">Ajouter au panier</button>
                     </div>
                 </div>
-                <!-- Projet 2 -->
-                <div class="gallery-card group relative rounded-3xl overflow-hidden bg-slate-100 aspect-[4/5] cursor-pointer shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80" alt="Interface" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white font-bold text-xl">Site E-commerce</h3>
-                        <p class="text-slate-200 text-sm">Boutique en ligne premium</p>
-                    </div>
-                </div>
-                <!-- Projet 3 -->
-                <div class="gallery-card group relative rounded-3xl overflow-hidden bg-slate-100 aspect-[4/5] cursor-pointer shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1481487196290-c152efe083f5?auto=format&fit=crop&w=800&q=80" alt="Branding" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <h3 class="text-white font-bold text-xl">Branding Agency</h3>
-                        <p class="text-slate-200 text-sm">Identité visuelle complète</p>
-                    </div>
-                </div>
+                <h3 class="font-bold text-sm text-navy uppercase tracking-wide">Robe Soie d'Été</h3>
+                <p class="text-gold font-bold mt-2">189,00 €</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- SECTION : PRODUITS MODE HOMME -->
+    <section id="shop-homme" class="py-24 bg-navy px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-12 border-b border-white/10 pb-6">
                 <div>
-                    <h2 class="text-4xl font-bold mb-6">Travaillons ensemble</h2>
-                    <p class="text-lg text-slate-600 mb-8">
-                        Vous avez une idée de projet ou besoin d'un développeur ? N'hésitez pas à me contacter via ce formulaire ou mes réseaux sociaux.
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
-                            </div>
-                            <span class="font-medium">contact@votre-domaine.com</span>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                                <i data-lucide="map-pin" class="w-5 h-5"></i>
-                            </div>
-                            <span class="font-medium">Paris, France</span>
-                        </div>
-                    </div>
+                    <h2 class="text-2xl font-serif text-white uppercase tracking-widest">Mode Homme</h2>
+                    <p class="text-gold text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Élégance Masculine</p>
                 </div>
+            </div>
 
-                <div class="bg-white p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
-                    <form id="contactForm" class="space-y-5">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Nom</label>
-                            <input type="text" placeholder="Votre nom" class="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all outline-none" required>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-white">
+                <div class="product-card group cursor-pointer">
+                    <div class="aspect-[4/5] overflow-hidden rounded-2xl bg-white/5 mb-6 relative">
+                        <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?auto=format&fit=crop&w=500&q=80" class="product-img w-full h-full object-cover transition-transform duration-700">
+                        <div class="absolute inset-x-4 bottom-4">
+                            <button onclick="addToCart()" class="add-btn w-full bg-gold text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-white hover:text-navy transition-all">Ajouter au panier</button>
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
-                            <input type="email" placeholder="votre@email.com" class="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
-                            <textarea rows="4" placeholder="Votre projet en quelques mots..." class="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-600 transition-all outline-none" required></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center justify-center space-x-2">
-                            <span>Envoyer</span>
-                            <i data-lucide="send" class="w-4 h-4"></i>
-                        </button>
-                    </form>
-                    <div id="success" class="hidden text-center p-6 space-y-3">
-                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="check-circle" class="w-8 h-8"></i>
-                        </div>
-                        <h3 class="text-xl font-bold">Message envoyé !</h3>
-                        <p class="text-slate-500">Merci de m'avoir contacté. Je vous répondrai dans les plus brefs délais.</p>
-                        <button onclick="resetForm()" class="text-blue-600 font-semibold text-sm underline mt-4">Envoyer un autre message</button>
                     </div>
+                    <h3 class="font-bold text-sm uppercase tracking-wide">Veste de Ville Slim Fit</h3>
+                    <p class="text-gold font-bold mt-2">245,00 €</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-slate-100 bg-white">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500">
-            <div class="font-bold text-slate-900">© 2024 Mon Portfolio.</div>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-blue-600 transition-colors"><i data-lucide="twitter"></i></a>
-                <a href="#" class="hover:text-blue-600 transition-colors"><i data-lucide="github"></i></a>
-                <a href="#" class="hover:text-blue-600 transition-colors"><i data-lucide="linkedin"></i></a>
+    <footer class="bg-white py-20 px-6 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-xl font-serif font-bold tracking-widest text-navy uppercase mb-4 block">Kenz Shop</span>
+            <p class="text-gray-400 text-xs uppercase tracking-widest mb-10">Qualité • Style • Authenticité</p>
+            <div class="flex justify-center space-x-8 mb-10 text-navy">
+                <a href="#" class="hover:text-gold transition"><i data-lucide="instagram"></i></a>
+                <a href="#" class="hover:text-gold transition"><i data-lucide="facebook"></i></a>
             </div>
+            <p class="text-gray-300 text-[10px] uppercase tracking-[0.3em]">© 2024 Kenz Shop Boutique Officielle</p>
         </div>
     </footer>
 
     <script>
-        // Initialiser les icônes
         lucide.createIcons();
 
         // Menu Mobile
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuIcon = document.getElementById('menuIcon');
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobileMenu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
 
-        menuBtn.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.toggle('hidden');
-            menuIcon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
-            lucide.createIcons();
-        });
-
-        // Fermer le menu mobile au clic sur un lien
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
-
-        // Formulaire de contact
-        const form = document.getElementById('contactForm');
-        const success = document.getElementById('success');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Simulation d'envoi
-            form.classList.add('hidden');
-            success.classList.remove('hidden');
-        });
-
-        function resetForm() {
-            form.reset();
-            form.classList.remove('hidden');
-            success.classList.add('hidden');
+        // Gestion du panier (simulation)
+        let count = 0;
+        function addToCart() {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            
+            // Petit effet visuel
+            const badge = document.getElementById('cart-count');
+            badge.style.transform = 'scale(1.5)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
         }
+
+        // Fermer le menu au clic
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
     </script>
 </body>
 </html>
